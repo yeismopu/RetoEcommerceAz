@@ -20,7 +20,7 @@ variable "sql_admin" {
   default = "sqladminuser"
 }
 
-variable "sql_password" {
+variable "SQL_PASSWORD" {
   sensitive = true
 }
 
