@@ -6,6 +6,10 @@ on:
       - develop
       - main
 
+concurrency:
+  group: terraform-${{ github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   terraform:
     name: Terraform Plan & Apply
