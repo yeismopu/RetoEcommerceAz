@@ -25,7 +25,7 @@ jobs:
 
       - name: Set Terraform Environment
         run: |
-          if [ "${GITHUB_REF_NAME}" == "main" ]; then
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
             echo "TF_VAR_environment=pdn" >> $GITHUB_ENV
           else
             echo "TF_VAR_environment=dev" >> $GITHUB_ENV
@@ -33,18 +33,16 @@ jobs:
 
       - name: Terraform Init
         run: |
-          if [ "${GITHUB_REF_NAME}" == "main" ]; then
-            terraform init -input=false \
-              -backend-config="key=pdn.tfstate"
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            terraform init -input=false -backend-config="key=pdn.tfstate"
           else
-            terraform init -input=false \
-              -backend-config="key=dev.tfstate"
+            terraform init -input=false -backend-config="key=dev.tfstate"
           fi
 
       - name: Terraform Plan
         run: terraform plan -input=false
         env:
-          TF_VAR_SQL_PASSWORD ${{ secrets.TF_VAR_SQL_PASSWORD }} #En mayuscula
+          TF_VAR_SQL_PASSWORD: ${{ secrets.TF_VAR_SQL_PASSWORD }}
           TF_VAR_environment: ${{ env.TF_VAR_environment }}
 
       - name: Terraform Apply (DEV)
