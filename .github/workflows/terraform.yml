@@ -24,7 +24,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Set Terraform Environment #setea el ambiente
+      - name: Set Terraform Environment
         run: |
           if [ "${GITHUB_REF_NAME}" == "main" ]; then
             echo "TF_VAR_environment=pdn" >> $GITHUB_ENV
