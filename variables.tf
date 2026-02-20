@@ -5,6 +5,7 @@ variable "location" {
 variable "resource_group_name" {
   description = "Nombre base del resource group"
   type        = string
+  default     = "rg-ecommerce"
 }
 
 variable "aks_name" {
