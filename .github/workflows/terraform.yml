@@ -10,6 +10,8 @@ jobs:
   terraform:
     name: Terraform Workflow
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_sql_password: ${{ secrets.TF_VAR_SQL_PASSWORD }}
 
     steps:
       - name: Checkout repository
