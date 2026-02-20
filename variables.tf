@@ -3,7 +3,8 @@ variable "location" {
 }
 
 variable "resource_group_name" {
-  default = "rg-reto-ecommerce"
+  description = "Nombre base del resource group"
+  type        = string
 }
 
 variable "aks_name" {
@@ -20,4 +21,9 @@ variable "sql_admin" {
 
 variable "sql_password" {
   sensitive = true
+}
+
+variable "environment" {
+  description = "Environment: dev o pdn según el branch"
+  type        = string
 }

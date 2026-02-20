@@ -1,6 +1,6 @@
-# AKS E-commerce Infrastructure
+# Reto Infraestructura Ecommerce
 
-Infrastructure as Code using Terraform to deploy:
+Infraestructura Azure como codigo usando Terraform para el despliegue automatico:
 
 - Azure Kubernetes Service (AKS)
 - Azure SQL Database
@@ -8,8 +8,9 @@ Infrastructure as Code using Terraform to deploy:
 - Azure Key Vault
 - Private Endpoints
 - Log Analytics
+- Azure FrontDoor
 
-## Tech Stack
+## Tecnologías utilizadas
 - Terraform
 - Azure
 - GitHub Actions (CI/CD)
