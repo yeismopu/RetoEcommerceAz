@@ -32,24 +32,31 @@ jobs:
           fi
 
       - name: Terraform Init
-        run: terraform init -input=false
+        run: |
+          if [ "${GITHUB_REF_NAME}" == "main" ]; then
+            terraform init -input=false \
+              -backend-config="key=pdn.tfstate"
+          else
+            terraform init -input=false \
+              -backend-config="key=dev.tfstate"
+          fi
 
       - name: Terraform Plan
         run: terraform plan -input=false
         env:
-          TF_VAR_SQL_PASSWORD: ${{ secrets.TF_VAR_SQL_PASSWORD }}
+          TF_VAR_sql_password: ${{ secrets.TF_VAR_sql_password }}
           TF_VAR_environment: ${{ env.TF_VAR_environment }}
 
       - name: Terraform Apply (DEV)
         if: github.ref_name == 'develop'
         run: terraform apply -auto-approve -input=false
         env:
-          TF_VAR_SQL_PASSWORD: ${{ secrets.TF_VAR_SQL_PASSWORD }}
+          TF_VAR_sql_password: ${{ secrets.TF_VAR_sql_password }}
           TF_VAR_environment: ${{ env.TF_VAR_environment }}
 
       - name: Terraform Apply (PDN)
         if: github.ref_name == 'main'
         run: terraform apply -input=false
         env:
-          TF_VAR_SQL_PASSWORD: ${{ secrets.TF_VAR_SQL_PASSWORD }}
+          TF_VAR_sql_password: ${{ secrets.TF_VAR_sql_password }}
           TF_VAR_environment: ${{ env.TF_VAR_environment }}
