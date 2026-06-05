@@ -14,14 +14,3 @@ resource "azurerm_mssql_database" "db" {
   sku_name       = "Basic"
   zone_redundant = false
 }
-
-#resource "azurerm_redis_cache" "redis" {
-#  name                			= "redisecommerce1234"
-#  location            			= azurerm_resource_group.rg.location
-#  resource_group_name 			= azurerm_resource_group.rg.name
-#  public_network_access_enabled = false
-#  capacity            			= 1
-#  family              			= "C"
-#  sku_name            			= "Standard"
-#  minimum_tls_version 			= "1.2"
-#}
