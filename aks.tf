@@ -4,6 +4,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = "aks-ecommerce"
 
+  oidc_issuer_enabled       = true
+  workload_identity_enabled = true
+
   network_profile {
   network_plugin    = "azure"
   load_balancer_sku = "standard"
@@ -20,6 +23,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     min_count           = 1
     max_count           = 5
   }
+
   identity {
     type = "SystemAssigned"
   }

@@ -26,35 +26,35 @@ resource "azurerm_private_endpoint" "sql_pe" {
     name                 = "sql-dns-zone-group"
     private_dns_zone_ids = [azurerm_private_dns_zone.sql_dns.id]
   }
-}
-resource "azurerm_private_dns_zone" "redis_dns" {
-  name                = "privatelink.redis.cache.windows.net"
-  resource_group_name = azurerm_resource_group.rg.name
-}
+#}
+#resource "azurerm_private_dns_zone" "redis_dns" {
+#  name                = "privatelink.redis.cache.windows.net"
+#  resource_group_name = azurerm_resource_group.rg.name
+#}
 
-resource "azurerm_private_dns_zone_virtual_network_link" "redis_dns_link" {
-  name                  = "redis-dns-link"
-  resource_group_name   = azurerm_resource_group.rg.name
-  private_dns_zone_name = azurerm_private_dns_zone.redis_dns.name
-  virtual_network_id    = azurerm_virtual_network.vnet.id
-}
-resource "azurerm_private_endpoint" "redis_pe" {
-  name                = "pe-redis"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.private_endpoints.id
+#resource "azurerm_private_dns_zone_virtual_network_link" "redis_dns_link" {
+#  name                  = "redis-dns-link"
+#  resource_group_name   = azurerm_resource_group.rg.name
+#  private_dns_zone_name = azurerm_private_dns_zone.redis_dns.name
+#  virtual_network_id    = azurerm_virtual_network.vnet.id
+#}
+#resource "azurerm_private_endpoint" "redis_pe" {
+#  name                = "pe-redis"
+#  location            = azurerm_resource_group.rg.location
+#  resource_group_name = azurerm_resource_group.rg.name
+#  subnet_id           = azurerm_subnet.private_endpoints.id
 
-  private_service_connection {
-    name                           = "psc-redis"
-    private_connection_resource_id = azurerm_redis_cache.redis.id
-    subresource_names              = ["redisCache"]
-    is_manual_connection           = false
-  }
+#  private_service_connection {
+#    name                           = "psc-redis"
+#    private_connection_resource_id = azurerm_redis_cache.redis.id
+#    subresource_names              = ["redisCache"]
+#    is_manual_connection           = false
+#  }
 
-  private_dns_zone_group {
-    name                 = "redis-dns-zone-group"
-    private_dns_zone_ids = [azurerm_private_dns_zone.redis_dns.id]
-  }
+#  private_dns_zone_group {
+#    name                 = "redis-dns-zone-group"
+#    private_dns_zone_ids = [azurerm_private_dns_zone.redis_dns.id]
+#  }
 }
 
 resource "azurerm_private_dns_zone" "kv_dns" {
