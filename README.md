@@ -14,3 +14,5 @@ Infraestructura Azure como codigo usando Terraform para el despliegue automatico
 - Terraform
 - Azure
 - GitHub Actions (CI/CD)
+
+## Fecha 05/06/2026
